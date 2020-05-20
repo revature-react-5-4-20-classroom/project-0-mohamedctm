@@ -12,11 +12,16 @@ export async function getAll(): Promise<Reimbursement[]> {
   {
     let result : QueryResult;
     result = await client.query(
-      `SELECT *
-      FROM project_0_reimbursement`
+      `SELECT reimbursementid,t5.username,amount,datesubmitted,dateresolved,description, t4.firstname,t2.status,t3.type
+      FROM project_0_reimbursement t1 
+      join project_0_reimbursement_status t2 on t1.status = t2.statusid
+      join project_0_reimbursement_type t3 on t1.type = t3.typeid 
+      join project_0_users t4 on t1.resolver = t4.userid 
+      join project_0_users t5 on t1.author = t5.userid 
+      order by reimbursementid desc`
     );
     return result.rows.map((r) => {
-      return new Reimbursement(r.reimbursementId,r.id,r.amount,r.dateSubmitted,r.dateResolved,r.description, r.resolver,r.status,r.type);
+      return new Reimbursement(r.reimbursementid,r.username,r.amount,r.dateSubmitted,r.dateResolved,r.description, r.firstname,r.status,r.type);
     });
   }
   catch(e) 

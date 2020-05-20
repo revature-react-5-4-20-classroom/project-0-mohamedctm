@@ -21,9 +21,6 @@ app.use('/users', userRouter);
 app.use('/reimbursements', reimbursementsRouter);
 app.use('/login', loginRouter);
 
-app.get('/',(req, res)=>{
-    res.sendFile(__dirname + '/index.ejs',{});
-})
 
 
 const port = process.env.port||3000
