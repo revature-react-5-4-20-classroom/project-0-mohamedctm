@@ -17,7 +17,7 @@ require('dotenv').config();
 const app: Application = express();
 
 //checking webhokk
-app.get('/new-endpoint',(req:Request, res:Response)=>{
+app.get('/new-endpoint2',(req:Request, res:Response)=>{
     res.send(' WebHook works');
 
 });
