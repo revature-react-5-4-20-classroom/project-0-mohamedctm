@@ -1,4 +1,4 @@
-import {Application} from 'express'
+import {Response, Request, Application} from 'express'
 import express from 'express'
 import { userRouter } from "./Routers/users";
 import { loginRouter } from "./Routers/login";
@@ -15,6 +15,12 @@ require('dotenv').config();
 
 
 const app: Application = express();
+
+//checking webhokk
+app.get('/new-endpoint',(req:Request, res:Response)=>{
+    res.send(' WebHook is working');
+
+});
 
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
