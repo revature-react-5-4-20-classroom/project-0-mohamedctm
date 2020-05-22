@@ -18,7 +18,7 @@ const app: Application = express();
 
 //checking webhokk
 app.get('/new-endpoint',(req:Request, res:Response)=>{
-    res.send(' WebHook is working');
+    res.send(' WebHook works');
 
 });
 
