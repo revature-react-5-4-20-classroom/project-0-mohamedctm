@@ -6,8 +6,8 @@ import { reimbursementsRouter } from './Routers/reimbursements'
 import { loggingMiddleware } from './middleware/loggingMiddleware';
 import { sessionMiddleware } from './middleware/sessionMiddleware';
 import bodyParser from 'body-parser';
-import { PoolClient, QueryResult } from 'pg';
-import { connectionPool } from './repository';
+// import { PoolClient, QueryResult } from 'pg';
+// import { connectionPool } from './repository';
 
 
 
@@ -26,18 +26,21 @@ app.use('/users', userRouter);
 app.use('/reimbursements', reimbursementsRouter);
 app.use('/login', loginRouter);
 
+app.use('/users', userRouter);
+
+
 
 
 const port = process.env.port||3000
 
 app.listen(port, ()=>{
     console.log(`app listening port: ${port}`);
-    let client;
-         client =  connectionPool.connect();
-    if(client){
-        console.log(` connected to database ..`);
-    }else{
-        console.log(`not connected..`)
-    }
+    // let client;
+    //      client =  connectionPool.connect();
+    // if(client){
+    //     console.log(` connected to database ..`);
+    // }else{
+    //     console.log(`not connected..`)
+    // }
 
 })
