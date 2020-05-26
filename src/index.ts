@@ -39,20 +39,31 @@ app.use('/users', userRouter);
 
 const port = process.env.port||3000
 
-app.listen(port, ()=>{
-    console.log(`app listening port: ${port}`);
-    connectionPool.connect().then(
-        (client: PoolClient)=>{
-          console.log('connected');
-          // try to query tracks
-          // client.query returns a Promise of a query result
-          client.query('SELECT * FROM project-0-users;').then(
-            (result : QueryResult) => {
-              console.log(result.rows[0]);
-            }
-          )
-      }).catch((err)=>{
-        console.error(err.message);
-      })
+app.listen(3000, () => {
 
-})
+    // The following involves 3 different async steps.  Right now we're in a callback
+    // function that runs asynchronously when the express application starts.
+    // In this callback, we connect to the database, which is asynchronous, so we specify
+    // a callback for that.  In that callback, we query the database, which is asynchronous,
+    // so we specify a callback for it too.
+    // One of the reasons async/await was added to JS was to avoid "callback hell"
+  
+    console.log("app has started, testing connection:");
+    // connectionPool.connect() returns a Promise of a PoolClient
+    // we specify functionality for when the PoolClient arrives via callbacks:
+    // .then(onSuccess) specifies behaviour when the Promise resolves successfully
+    // .catch(onFailure) specifies behaviour when the Promise is rejected (fails).
+    connectionPool.connect().then(
+      (client: PoolClient)=>{
+        console.log('connected');
+        // try to query tracks
+        // client.query returns a Promise of a query result
+        client.query('SELECT * FROM books;').then(
+          (result : QueryResult) => {
+            console.log(result.rows[0]);
+          }
+        )
+    }).catch((err)=>{
+      console.error(err.message);
+    })
+  });
