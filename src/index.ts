@@ -17,8 +17,14 @@ require('dotenv').config();
 const app: Application = express();
 
 //checking webhokk
-app.get('/test',(req:Request, res:Response)=>{
-    res.send(' WebHook works!');
+app.get('/test',(req,res)=>{
+    
+    connectionPool.connect().then(
+      (client: PoolClient)=>{
+        res.status(201).send('connected');
+    }).catch((err)=>{
+      res.status(401).send(`no connection`);
+    })
 
 });
 
