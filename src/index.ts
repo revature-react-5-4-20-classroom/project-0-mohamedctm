@@ -6,8 +6,8 @@ import { reimbursementsRouter } from './Routers/reimbursements'
 import { loggingMiddleware } from './middleware/loggingMiddleware';
 import { sessionMiddleware } from './middleware/sessionMiddleware';
 import bodyParser from 'body-parser';
-// import { PoolClient, QueryResult } from 'pg';
-// import { connectionPool } from './repository';
+import { PoolClient, QueryResult } from 'pg';
+import { connectionPool } from './repository';
 
 
 
@@ -41,12 +41,18 @@ const port = process.env.port||3000
 
 app.listen(port, ()=>{
     console.log(`app listening port: ${port}`);
-    // let client;
-    //      client =  connectionPool.connect();
-    // if(client){
-    //     console.log(` connected to database ..`);
-    // }else{
-    //     console.log(`not connected..`)
-    // }
+    connectionPool.connect().then(
+        (client: PoolClient)=>{
+          console.log('connected');
+          // try to query tracks
+          // client.query returns a Promise of a query result
+          client.query('SELECT * FROM project-0-users;').then(
+            (result : QueryResult) => {
+              console.log(result.rows[0]);
+            }
+          )
+      }).catch((err)=>{
+        console.error(err.message);
+      })
 
 })
