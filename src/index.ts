@@ -17,14 +17,10 @@ require('dotenv').config();
 const app: Application = express();
 
 //checking webhokk
+const user = process.env.PG_USER|| 'NOT ASSIGNED'
 app.get('/test',(req,res)=>{
     
-    connectionPool.connect().then(
-      (client: PoolClient)=>{
-        res.status(201).send('connected');
-    }).catch((err)=>{
-      res.status(401).send(`no connection`);
-    })
+    res.send(`username: ${user}`);
 
 });
 
