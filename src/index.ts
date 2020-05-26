@@ -17,7 +17,7 @@ require('dotenv').config();
 const app: Application = express();
 
 //checking webhokk
-const user = process.env.PG_PASSWORD|| 'NOT ASSIGNED'
+const user = process.env.PG_HOST|| 'NOT ASSIGNED'
 app.get('/test',(req,res)=>{
     
     res.send(`username: ${user}`);
