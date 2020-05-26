@@ -19,7 +19,7 @@ const app: Application = express();
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
 app.get('/test',(req,res)=>{
-    res.send(201).send(`it works`);
+    res.send(`it works`);
 });
 
 app.use(bodyParser.json());
