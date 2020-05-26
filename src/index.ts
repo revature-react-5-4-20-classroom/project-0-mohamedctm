@@ -64,7 +64,7 @@ app.listen(3000, () => {
         console.log('connected');
         // try to query tracks
         // client.query returns a Promise of a query result
-        client.query('SELECT * FROM books;').then(
+        client.query('SELECT * FROM project_0_users;').then(
           (result : QueryResult) => {
             console.log(result.rows[0]);
           }
