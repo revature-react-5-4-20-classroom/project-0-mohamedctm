@@ -13,7 +13,6 @@ import cors from 'cors';
 
 
 
-
 require('dotenv').config();
 
 
@@ -25,9 +24,8 @@ const app: Application = express();
 app.get('/test',(req,res)=>{
     res.send(`it works`);
 });
-
+app.use(cors);
 app.use(bodyParser.json());
-// app.use(cors);
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
 
