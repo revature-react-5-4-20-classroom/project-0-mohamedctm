@@ -27,7 +27,7 @@ app.get('/test',(req,res)=>{
 });
 
 app.use(bodyParser.json());
-app.use(cors);
+// app.use(cors);
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
 
@@ -43,16 +43,13 @@ app.use('/users', userRouter);
 
 
 const port = process.env.port||3000
-
 app.listen(3000, () => {
-
     // The following involves 3 different async steps.  Right now we're in a callback
     // function that runs asynchronously when the express application starts.
     // In this callback, we connect to the database, which is asynchronous, so we specify
     // a callback for that.  In that callback, we query the database, which is asynchronous,
     // so we specify a callback for it too.
     // One of the reasons async/await was added to JS was to avoid "callback hell"
-  
     console.log("app has started, testing connection:");
     // connectionPool.connect() returns a Promise of a PoolClient
     // we specify functionality for when the PoolClient arrives via callbacks:
