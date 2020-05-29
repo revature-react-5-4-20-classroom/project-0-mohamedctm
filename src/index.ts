@@ -9,8 +9,7 @@ import bodyParser from 'body-parser';
 import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
 
-var cors = require('cors');
-
+import cors from 'cors';
 
 
 
@@ -20,7 +19,6 @@ require('dotenv').config();
 
 const app: Application = express();
 
-app.options("/login", cors());
 
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
@@ -29,6 +27,7 @@ app.get('/test',(req,res)=>{
 });
 
 app.use(bodyParser.json());
+app.use(cors);
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
 
