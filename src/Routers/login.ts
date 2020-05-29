@@ -1,10 +1,12 @@
 import express, { Router, Request, Response, NextFunction } from 'express';
 import {loguser} from '../repository/users';
 
+import cors from 'cors';
+
 
 export const loginRouter: Router = express.Router();
 
-  loginRouter.post('/', async (req: Request, res: Response) => {
+  loginRouter.post('/', cors(), async (req: Request, res: Response) => {
     const {username, password} = req.body;
     if(!username || !password) 
     res.status(400).json({"error":"username and password are required fields for login"});
