@@ -9,12 +9,18 @@ import bodyParser from 'body-parser';
 import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
 
+var cors = require('cors');
+
+
+
 
 
 require('dotenv').config();
 
 
 const app: Application = express();
+
+app.options('*', cors());
 
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
