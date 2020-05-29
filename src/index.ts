@@ -20,7 +20,7 @@ require('dotenv').config();
 
 const app: Application = express();
 
-app.options('*', cors());
+app.options("/login", cors());
 
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
