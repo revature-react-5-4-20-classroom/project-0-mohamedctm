@@ -8,8 +8,7 @@ import { sessionMiddleware } from './middleware/sessionMiddleware';
 import bodyParser from 'body-parser';
 import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
-
-import cors from 'cors';
+// import cors from 'cors';
 
 
 
@@ -24,7 +23,13 @@ const app: Application = express();
 app.get('/test',(req,res)=>{
     res.send(`it works`);
 });
-app.use(cors);
+// app.use(cors);
+
+app.use(function(req: Request, res: Response, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
