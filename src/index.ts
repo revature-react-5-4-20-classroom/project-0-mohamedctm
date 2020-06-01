@@ -22,7 +22,9 @@ const app: Application = express();
 
 
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
