@@ -5,8 +5,6 @@ import {loguser} from '../repository/users';
 export const loginRouter: Router = express.Router();
 
   loginRouter.post('/', async (req: Request, res: Response) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const {username, password} = req.body;
     if(!username || !password) 
     res.status(400).json({"error":"username and password are required fields for login"});
