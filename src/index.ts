@@ -18,12 +18,7 @@ require('dotenv').config();
 const app: Application = express();
 
 
-//checking webhokk
-// const user = process.env.PG_HOST|| 'NOT ASSIGNED'
-app.get('/test',(req,res)=>{
-    res.send(`it works`);
-});
-// app.use(cors);
+
 
 app.use(function(req: Request, res: Response, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -34,6 +29,12 @@ app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
 
+//checking webhokk
+// const user = process.env.PG_HOST|| 'NOT ASSIGNED'
+app.get('/test',(req,res)=>{
+  res.send(`it works`);
+});
+// app.use(cors);
 
 app.use('/users', userRouter);
 //something more
