@@ -20,14 +20,17 @@ const app: Application = express();
 
 
 
-app.use(function(req: Request, res: Response, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-})
+
+
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
+
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
