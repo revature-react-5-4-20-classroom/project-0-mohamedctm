@@ -24,6 +24,7 @@ const app: Application = express();
 
 app.use(cors({
   credentials: true,
+  origin: 'http://localhost:3000'
 }));
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
