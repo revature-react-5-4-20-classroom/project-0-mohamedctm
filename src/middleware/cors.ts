@@ -1,3 +1,0 @@
-var cors = require('cors');
-
-
