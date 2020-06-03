@@ -8,7 +8,7 @@ import { sessionMiddleware } from './middleware/sessionMiddleware';
 import bodyParser from 'body-parser';
 import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
-import {corsFilter} from './middleware/corsFilter';
+var cors = require('cors');
 // import cors from 'cors';
 
 
@@ -22,11 +22,10 @@ const app: Application = express();
 
 
 
-// app.use(cors({
-//   credentials: true,
-//   origin: 'http://localhost:3000'
-// }));
-app.use(corsFilter);
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000'
+}));
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
@@ -35,7 +34,7 @@ app.use(loggingMiddleware);
 //checking webhokk
 // const user = process.env.PG_HOST|| 'NOT ASSIGNED'
 app.get('/test',(req,res)=>{
-  res.status(205).json({"message":"works"});
+  res.status(202).json({"message":"works"});
 });
 // app.use(cors);
 
