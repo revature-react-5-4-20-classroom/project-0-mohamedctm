@@ -8,6 +8,7 @@ import { sessionMiddleware } from './middleware/sessionMiddleware';
 import bodyParser from 'body-parser';
 import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
+import {corsFilter} from './middleware/corsFilter';
 var cors = require('cors');
 // import cors from 'cors';
 
@@ -22,10 +23,11 @@ const app: Application = express();
 
 
 
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:3000|http://react-app-2.s3-website-us-east-1.amazonaws.com'
-}));
+// app.use(cors({
+//   credentials: true,
+//   origin: 'http://localhost:3000|http://react-app-2.s3-website-us-east-1.amazonaws.com'
+// }));
+app.use(corsFilter);
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
 app.use(loggingMiddleware);
