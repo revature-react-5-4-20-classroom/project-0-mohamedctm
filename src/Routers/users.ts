@@ -36,7 +36,7 @@ userRouter.get('/', async (req: Request, res: Response) => {
       if(myrole === 'finance-manager') {
         res.json( await getAllUsers());
       }else{
-        res.status(401).send(`Sorry! finance-manager role is required.`)
+        res.status(401).json(`Sorry! finance-manager role is required.`)
       }
     }
 });
