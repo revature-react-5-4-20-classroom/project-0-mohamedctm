@@ -24,7 +24,7 @@ const app: Application = express();
 
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost:3000|http://react-app-2.s3-website-us-east-1.amazonaws.com'
 }));
 app.use(bodyParser.json());
 app.use(sessionMiddleware);
