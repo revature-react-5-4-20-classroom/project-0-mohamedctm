@@ -30,7 +30,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
 
 userRouter.get('/', async (req: Request, res: Response) => {
   if(!req.session || !req.session.user) {
-    res.status(401).send('Please login here');
+    res.status(401).json('Please login here..');
   } else {
     const myrole = req.session.user.role;
       if(myrole === 'finance-manager') {
