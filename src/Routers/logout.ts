@@ -9,6 +9,9 @@ export const logoutRouter: Router = express.Router();
             req.session.destroy;
         res.status(201);
         }
+        else{
+            res.status(403);
+        }
       } catch (e) {
         console.log(e.message);
         res.status(401).json({"error":"can delete session"});
