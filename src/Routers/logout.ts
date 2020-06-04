@@ -3,7 +3,7 @@ import express, { Router, Request, Response, NextFunction } from 'express';
 
 export const logoutRouter: Router = express.Router();
 
-  logoutRouter.post('/', async (req: Request, res: Response) => {
+  logoutRouter.get('/', async (req: Request, res: Response) => {
       try{
         if(req.session){
             req.session.destroy;
