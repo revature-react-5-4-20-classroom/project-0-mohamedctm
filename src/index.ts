@@ -10,7 +10,7 @@ import { PoolClient, QueryResult } from 'pg';
 import { connectionPool } from './repository';
 import {corsFilter} from './middleware/corsFilter';
 var cors = require('cors');
-// import cors from 'cors';
+
 
 
 
