@@ -7,6 +7,8 @@ import session from 'express-session';
 const sessionConfig = {
   secret: '#####123##',
   cookie: {secure:true},
+  name : 'project0',
+  sameSite: 'None',
   resave: false,
   saveUninitialized: false
 }
