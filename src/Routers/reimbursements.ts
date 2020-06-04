@@ -45,13 +45,13 @@ reimbursementsRouter.get('/author/userid/:userId', async (req: Request, res: Res
 
 reimbursementsRouter.get('/', async (req: Request, res: Response) => {
   if(!req.session || !req.session.user) {
-    res.status(401).send('Please login here');
+    res.status(402).send('Please login here');
   } else {
     const myrole = req.session.user.role;
       if(myrole === 'finance-manager') {
         res.json( await getAll());
       }else{
-        res.status(401).send(`Sorry! finance-manager role is required.`)
+        res.status(403).send(`Sorry! finance-manager role is required.`)
       }
     }
 });
@@ -59,7 +59,7 @@ reimbursementsRouter.get('/', async (req: Request, res: Response) => {
 
 reimbursementsRouter.post('/', async (req: Request, res: Response)=>{
     if(!req.session || !req.session.user) {
-        res.status(401).send('Please login here');
+        res.status(402).send('Please login here');
       }else{
         const myid = req.session.user.id;
         const {amount,description,type} = req.body;
@@ -77,7 +77,7 @@ reimbursementsRouter.post('/', async (req: Request, res: Response)=>{
 reimbursementsRouter.patch('/', async (req: Request, res: Response) => {
   const {reimbursementid,author,amount,description,status,type} = req.body;
   if(!req.session || !req.session.user) {
-    res.status(401).send('Please login here');
+    res.status(402).send('Please login here');
   } else {
     const myrole = req.session.user.role;
     const myid = req.session.user.id;
@@ -89,7 +89,7 @@ reimbursementsRouter.patch('/', async (req: Request, res: Response) => {
             res.json(users);
             }
       }else{
-        res.status(401).send(`Sorry! finance-manager role is required.`)
+        res.status(403).send(`Sorry! finance-manager role is required.`)
       }
     } 
 });

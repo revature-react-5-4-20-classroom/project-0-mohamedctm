@@ -16,14 +16,14 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
     res.status(400).send('Must include numeric id in path');
   }
     if(!req.session || !req.session.user) {
-      res.status(401).send('Please login here');
+      res.status(402).send('Please login here');
     } else {
       const myid = req.session.user.id;
       const myrole = req.session.user.role;
         if(myid === id || myrole === 'finance-manager') {
           res.json(await getUserById(id));
         }else{
-          res.status(401).send(`Sorry! finance-manager role is required.`)
+          res.status(403).send(`Sorry! finance-manager role is required.`)
         }
       }
 });
