@@ -4,19 +4,14 @@ import express, { Router, Request, Response, NextFunction } from 'express';
 export const logoutRouter: Router = express.Router();
 
   logoutRouter.get('/', async (req: Request, res: Response) => {
-      try{
-        if(req.session){
-            req.session.destroy;
-        res.status(201);
-        }
-        else{
-            res.status(403);
-        }
-      } catch (e) {
-        console.log(e.message);
-        res.status(401).json({"error":"can delete session"});
-
-      } 
+    if (req.session) {
+        req.session.destroy(function() {
+            res.clearCookie('connect.sid', { path: '/' });
+            res.status(200).send('removed session');
+        });
+    } else {
+        res.status(200).send('no session assigned');
+    }
   }); 
 
 
