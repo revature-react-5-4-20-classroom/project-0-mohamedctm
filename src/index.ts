@@ -2,6 +2,7 @@ import {Response, Request, Application} from 'express'
 import express from 'express'
 import { userRouter } from "./Routers/users";
 import { loginRouter } from "./Routers/login";
+import { logoutRouter } from "./Routers/logout";
 import { reimbursementsRouter } from './Routers/reimbursements'
 import { loggingMiddleware } from './middleware/loggingMiddleware';
 import { sessionMiddleware } from './middleware/sessionMiddleware';
@@ -44,6 +45,7 @@ app.use('/users', userRouter);
 //something more
 app.use('/reimbursements', reimbursementsRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 
 app.use('/users', userRouter);
 
