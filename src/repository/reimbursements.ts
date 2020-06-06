@@ -21,7 +21,7 @@ export async function getAll(): Promise<Reimbursement[]> {
       order by reimbursementid desc`
     );
     return result.rows.map((r) => {
-      return new Reimbursement(r.reimbursementid,r.username,r.amount,r.dateSubmitted,r.dateResolved,r.description, r.firstname,r.status,r.type);
+      return new Reimbursement(r.reimbursementid,r.username,r.amount,r.datesubmitted,r.dateResolved,r.description, r.firstname,r.status,r.type);
     });
   }
   catch(e) 
