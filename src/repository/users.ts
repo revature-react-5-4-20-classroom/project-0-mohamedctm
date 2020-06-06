@@ -40,12 +40,12 @@ export async function updateUser(username: string,password:string,firstname:stri
       `,[username,password,firstname,lastname,email,roleId, userId]);
 
       const retrieve : QueryResult = await client.query(`
-      SELECT userId,username,"password",firstname,lastname, email,role
-      FROM project_0_users users join project_0_role roles on users.role = roles.roleId  where userId = $1;
+      SELECT userId,username,"password",firstname,lastname, email,roles.role
+      FROM project_0_users users join project_0_role roles on users.role = roles.roleId where userId = $1;
       `,[userId]);
 
       const check =  retrieve.rows.map(
-        (u)=>{return new User(u.userid,u.username,u.password,u.firstname,u.lastname,u.email,u.role )}
+        (u)=>{return new User(u.userId,u.username,u.password,u.firstname,u.lastname,u.email,u.role )}
       );
       if(updating.rowCount > 0) {
         return check[0];
