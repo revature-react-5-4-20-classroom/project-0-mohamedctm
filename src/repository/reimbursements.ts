@@ -21,7 +21,7 @@ export async function getAll(): Promise<Reimbursement[]> {
       order by reimbursementid desc`
     );
     return result.rows.map((r) => {
-      return new Reimbursement(r.reimbursementid,r.username,r.amount,r.datesubmitted,r.dateResolved,r.description, r.firstname,r.status,r.type);
+      return new Reimbursement(r.reimbursementid,r.username,r.amount,r.datesubmitted,r.deteresolved,r.description, r.firstname,r.status,r.type);
     });
   }
   catch(e) 
@@ -45,7 +45,7 @@ export async function create(id:number,amount:number,description:string, type:nu
 
         
       const retrieve : QueryResult = await client.query(`
-      SELECT reimbursementid,t5.username,amount,datesubmitted,dateresolved,description, t4.firstname,t2.status,t3.type
+      SELECT reimbursementid,t5.username,amount,datesubmitted,deteresolved,description, t4.firstname,t2.status,t3.type
       FROM project_0_reimbursement t1 
       join project_0_reimbursement_status t2 on t1.status = t2.statusid
       join project_0_reimbursement_type t3 on t1.type = t3.typeid 
@@ -55,7 +55,7 @@ export async function create(id:number,amount:number,description:string, type:nu
       `);
 
       const check =  retrieve.rows.map(
-        (r)=>{return new Reimbursement(r.reimbursementid,r.username,r.amount,r.datesubmitted,r.dateresolved,r.description, r.firstname,r.status,r.type)}
+        (r)=>{return new Reimbursement(r.reimbursementid,r.username,r.amount,r.datesubmitted,r.deteresolved,r.description, r.firstname,r.status,r.type)}
       );
       if(updating.rowCount > 0) {
         return check[0];
