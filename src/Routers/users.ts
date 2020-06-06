@@ -13,7 +13,7 @@ userRouter.post('/', async (req: Request, res: Response) => {
 userRouter.get('/:id', async (req: Request, res: Response) => {
   const id = +req.params.id;
   if(isNaN(id)){
-    res.status(400).send('Must include numeric id in path');
+    res.status(401).send('Must include numeric id in path');
   }
     if(!req.session || !req.session.user) {
       res.status(402).send('Please login here');
