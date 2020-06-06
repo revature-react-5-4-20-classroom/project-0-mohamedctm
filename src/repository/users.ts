@@ -36,16 +36,16 @@ export async function updateUser(username: string,password:string,firstname:stri
     {
       const updating : QueryResult = await client.query(`
       update project_0_users set username = COALESCE($1, username),"password"= COALESCE($2, password) ,firstname= COALESCE($3, firstname),lastname= COALESCE($4, lastname) ,
-       email= COALESCE($5, email),role=COALESCE($6, role) where userId = $7;
+       email= COALESCE($5, email),role=COALESCE($6, role) where userid = $7;
       `,[username,password,firstname,lastname,email,roleId, userId]);
 
       const retrieve : QueryResult = await client.query(`
-      SELECT userId,username,"password",firstname,lastname, email,roles.role
-      FROM project_0_users users join project_0_role roles on users.role = roles.roleId where userId = $1;
+      SELECT userid,username,"password",firstname,lastname, email,roles.role
+      FROM project_0_users users join project_0_role roles on users.role = roles.roleId where userid = $1;
       `,[userId]);
 
       const check =  retrieve.rows.map(
-        (u)=>{return new User(u.userId,u.username,u.password,u.firstname,u.lastname,u.email,u.role )}
+        (u)=>{return new User(u.userid,u.username,u.password,u.firstname,u.lastname,u.email,u.role )}
       );
       if(updating.rowCount > 0) {
         return check[0];
@@ -70,7 +70,7 @@ export async function getUserById(id: number) : Promise<User|string> {
   try
   {  
       const userdata : QueryResult = await client.query(`
-      SELECT userId, username, password,
+      SELECT userid, username, password,
       firstname, lastname, email, roles.role from
       project_0_users users 
       LEFT JOIN
