@@ -41,11 +41,23 @@ userRouter.get('/', async (req: Request, res: Response) => {
     }
 });
 
-userRouter.use(authorized(['admin']));
+// userRouter.use(authorized(['admin']));
 userRouter.patch('/', async (req: Request, res: Response) => {
   const {username,password,firstname,lastname,email,roleId, userId} = req.body;
+
+  if(!req.session || !req.session.user) {
+    res.status(402).send('Please login here');
+  } else {
+    const myid = req.session.user.id;
+      const myrole = req.session.user.role;
+        if(myid === userId || myrole === 'admin') {
   const users : string|User = await updateUser(username,password,firstname,lastname,email,roleId, userId);
   res.json(users);
+        }
+        else{
+          res.status(403).send(`Sorry! admin role is required.`)
+        }
+  }
 });
 
 
