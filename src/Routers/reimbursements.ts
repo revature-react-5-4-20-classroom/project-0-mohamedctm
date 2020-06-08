@@ -27,7 +27,7 @@ reimbursementsRouter.get('/status/:statusId', async (req: Request, res: Response
 reimbursementsRouter.get('/author/userid/:userId', async (req: Request, res: Response)=>{
     const id = +req.params.userId;
     if(isNaN(id)){
-      res.status(400).send('Must include numeric userId in url');
+      res.json('Must include numeric userId in url');
     }
       if(!req.session || !req.session.user) {
         res.status(401).send('Please login here');
